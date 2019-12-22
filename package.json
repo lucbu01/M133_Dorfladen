@@ -3,12 +3,15 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "test": "mocha"
+        "start": "cd frontend && ng build && cd .. && tsc && node build/server.js",
+        "test": "mocha",
+        "installAll": "cd frontend && npm install && cd .. && npm install"
     },
     "author": "Luca Bucher",
     "license": "MIT",
     "dependencies": {
-        "@types/express": "^4.17.2"
+        "@types/express": "^4.17.2",
+        "fs": "0.0.1-security"
     },
     "devDependencies": {
         "@types/chai": "4.2.5",
