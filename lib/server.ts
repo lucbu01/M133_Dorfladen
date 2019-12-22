@@ -1,7 +1,16 @@
 import * as express from 'express';
+import * as cookieParser from 'cookie-parser';
+import * as expressSession from 'express-session';
 import * as fs from 'fs';
 
 const app = express();
+app.use(cookieParser());
+app.use(expressSession({
+    secret: 'super-safa-secret',
+    resave: false,
+    saveUninitialized: true
+}));
+
 const port = 8080;
 
 app.get('/', (req, res) => {
