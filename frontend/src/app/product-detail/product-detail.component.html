@@ -1,0 +1,19 @@
+<div *ngIf="product" class="products">
+    <img [src]="'/api/img/' + product.imageName" [alt]="product.productName">
+    <div class="details">
+        <h1>{{product.productName}}</h1>
+        <p>{{product.description}}</p>
+        <p class="prices">
+            <span>
+                CHF {{(product.specialOffer ? product.specialOffer : product.normalPrice) | number : '1.2-2'}} 
+            </span>
+            <span class="oldPrice" *ngIf="product.specialOffer">
+                CHF {{product.normalPrice | number : '1.2-2'}}
+            </span>
+        </p>
+        <button class="btn btn-primary" (click)="addToCart()">
+            <mat-icon>add_shopping_cart</mat-icon>
+            In den Warenkorb
+        </button>
+    </div>
+</div>

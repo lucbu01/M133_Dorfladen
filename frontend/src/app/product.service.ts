@@ -14,4 +14,8 @@ export class ProductService {
   public getAllProducts(): Observable<Product[]> {
     return this.httpClient.get('/api/products').pipe(map(data => data as Product[]));
   }
+
+  public getById(id: string): Observable<Product> {
+    return this.httpClient.get(`/api/product/${id}`).pipe(map(data => data as Product));
+  }
 }

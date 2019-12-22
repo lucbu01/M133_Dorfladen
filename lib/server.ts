@@ -19,6 +19,16 @@ app.get('/api/products', (req, res) => {
     res.send(ProductReader.readAllProducts());
 });
 
+app.get('/api/product/:id', (req, res) => {
+    const product = ProductReader.getById(req.params.id);
+    if(product) {
+        res.header({'Content-Type': 'application/json', 'status': 200});
+        res.send(product);
+    } else {
+        res.sendStatus(404);
+    }
+});
+
 app.get('/api/img/:name', (req, res) => {
     fs.readFile(`data/${req.params.name}`, (err, data) => {
         if (err) {

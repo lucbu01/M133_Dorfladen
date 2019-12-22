@@ -1,11 +1,11 @@
 <div class="products">
-    <div *ngFor="let product of products" class="card">
+    <div *ngFor="let product of products" class="card" [routerLink]="['/product', product.id]">
         <img [src]="'/api/img/' + product.imageName" class="card-img-top" [alt]="product.productName">
         <div class="card-body">
             <h5 class="card-title">{{product.productName}}</h5>
             <p class="card-text">
                 <span>
-                    CHF {{product.specialOffer ? product.specialOffer : product.normalPrice | number : '1.2-2'}} 
+                    CHF {{(product.specialOffer ? product.specialOffer : product.normalPrice) | number : '1.2-2'}} 
                 </span>
                 <span class="oldPrice" *ngIf="product.specialOffer">
                     CHF {{product.normalPrice | number : '1.2-2'}}

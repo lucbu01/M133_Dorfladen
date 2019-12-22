@@ -10,11 +10,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 
 import { OverviewComponent } from './overview/overview.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OverviewComponent
+    OverviewComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

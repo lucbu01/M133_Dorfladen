@@ -11,7 +11,8 @@
     width: 250px;
 }
 
-.oldPrice {
-    color: #dc3545;
-    text-decoration: line-through;
+.card:hover {
+    background-color: #EEEEEE;
+    border-width: 2px;
+    cursor: pointer;
 }
