@@ -1,7 +1,8 @@
 import * as express from 'express';
 import * as cookieParser from 'cookie-parser';
 import * as expressSession from 'express-session';
-import { ProductReader } from './ProductReader'
+import { ProductReader } from './ProductReader';
+import { Cart } from '../models/Cart';
 import * as fs from 'fs';
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(expressSession({
 }));
 
 const port = 8080;
+const carts = {};
 
 app.get('/api/products', (req, res) => {
     res.header({'Content-Type': 'application/json', 'status': 200});
@@ -39,6 +41,24 @@ app.get('/api/img/:name', (req, res) => {
             res.send(data);
         }
     });
+});
+
+app.get('/api/cart', (req, res) => {
+    const cart = getCart(req);
+    res.header({'Content-Type': 'application/json', 'status': 200});
+    res.send(cart);
+});
+
+app.get('/api/cart/add/:id', (req, res) => {
+    const product = ProductReader.getById(req.params.id);
+    const cart = getCart(req);
+    if(product) {
+        cart.add(product);
+        res.header({'Content-Type': 'application/json', 'status': 200});
+        res.send(cart);
+    } else {
+        res.sendStatus(404);
+    }
 });
 
 app.get('*', (req, res) => {
@@ -81,4 +101,11 @@ function getContentType(fileName: string): string {
     if(fileName.endsWith('.json')){
         return 'application/json';
     }
+}
+
+function getCart(req) : Cart {
+    if(!carts[req.session.id]) {
+        carts[req.session.id] = new Cart();
+    }
+    return carts[req.session.id] as Cart;
 }

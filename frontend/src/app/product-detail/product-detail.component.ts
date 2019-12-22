@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../product.service';
 import { Product } from '../../../../models/Product';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,7 +20,7 @@ export class ProductDetailComponent implements OnInit {
     this.tryLoad();
   }
 
-  constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private cartService: CartService) { }
 
   ngOnInit() {
     this.subscriptions = [
@@ -40,6 +41,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() {
-    
+    this.cartService.addToCart(this.product);
   }
 }
