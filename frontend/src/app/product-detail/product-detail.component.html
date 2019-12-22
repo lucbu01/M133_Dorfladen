@@ -5,9 +5,9 @@
         <p>{{product.description}}</p>
         <p class="prices">
             <span>
-                CHF {{(product.specialOffer ? product.specialOffer : product.normalPrice) | number : '1.2-2'}} 
+                CHF {{product.price | number : '1.2-2'}} 
             </span>
-            <span class="oldPrice" *ngIf="product.specialOffer">
+            <span class="oldPrice" *ngIf="product.hasSpecialOffer">
                 CHF {{product.normalPrice | number : '1.2-2'}}
             </span>
         </p>

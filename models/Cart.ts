@@ -1,20 +1,25 @@
-import {Product} from './Product';
+import { Product} from './Product';
 
-interface CartPosition {
+export class CartPosition {
     product: Product;
     count: number;
-}
 
-export interface ICart {
-    positions: CartPosition[];
+    constructor(product: Product, count?: number) {
+        this.product = product;
+        this.count = count ? count : 1;
+    }
+
+    get total(): number {
+        return this.count * this.product.price;
+    }
 }
 
 export class Cart {
-    private positions: CartPosition[] = [];
+    positions: CartPosition[] = [];
 
     get total(): number {
         let total = 0;
-        this.positions.forEach(position => total += (position.count * (position.product.specialOffer ? position.product.specialOffer : position.product.normalPrice)));
+        this.positions.forEach(position => total += position.total);
         return total;
     }
 
@@ -23,13 +28,7 @@ export class Cart {
         if(position.length === 1) {
             position[0].count++;
         } else {
-            this.positions.push({product: product, count: 1});
+            this.positions.push(new CartPosition(product));
         }
-    }
-
-    static of(iCart: any): Cart {
-        const cart = new Cart();
-        cart.positions = iCart.positions;
-        return cart;
     }
 }
