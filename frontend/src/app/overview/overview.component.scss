@@ -1,0 +1,17 @@
+.products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.card {
+    margin: 10px;
+    width: 250px;
+}
+
+.oldPrice {
+    color: #dc3545;
+    text-decoration: line-through;
+}

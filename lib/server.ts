@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as cookieParser from 'cookie-parser';
 import * as expressSession from 'express-session';
+import { ProductReader } from './ProductReader'
 import * as fs from 'fs';
 
 const app = express();
@@ -13,23 +14,40 @@ app.use(expressSession({
 
 const port = 8080;
 
-app.get('/', (req, res) => {
-    res.header({'Content-Type': 'text/html', 'status': 200});
-    fs.readFile('frontend/dist/dorfladen/index.html', (err, data) => {
-        res.send(data);
-    });
+app.get('/api/products', (req, res) => {
+    res.header({'Content-Type': 'application/json', 'status': 200});
+    res.send(ProductReader.readAllProducts());
 });
 
-app.get('/:path', (req, res) => {
-    fs.readFile(`frontend/dist/dorfladen/${req.params.path}`, (err, data) => {
-        if(err) {
-            res.header({'status': 404});
-            res.send();
-        } else {
-            res.header({'Content-Type': getContentType(req.params.path), 'status': 200});
+app.get('/api/img/:name', (req, res) => {
+    fs.readFile(`data/${req.params.name}`, (err, data) => {
+        if (err) {
+            res.sendStatus(404);
+        }
+        else {
+            res.header({ 'Content-Type': getContentType(req.params.name), 'status': 200 });
             res.send(data);
         }
     });
+});
+
+app.get('*', (req, res) => {
+    if (/(\.html|\.js|\.ico|\.json|\.jpg|\.png)$/.test(req.path)) {
+        fs.readFile(`frontend/dist/dorfladen${req.path}`, (err, data) => {
+            if (err) {
+                res.sendStatus(404);
+            }
+            else {
+                res.header({ 'Content-Type': getContentType(req.path), 'status': 200 });
+                res.send(data);
+            }
+        });
+    } else {
+        res.header({ 'Content-Type': 'text/html', 'status': 200 });
+        fs.readFile('frontend/dist/dorfladen/index.html', (err, data) => {
+            res.send(data);
+        });
+    }
 });
 
 app.listen(port, () => console.log(`server is started and listen on port ${port}`));
@@ -49,5 +67,8 @@ function getContentType(fileName: string): string {
     }
     if(fileName.endsWith('.ico')){
         return 'image/x-icon';
+    }
+    if(fileName.endsWith('.json')){
+        return 'application/json';
     }
 }

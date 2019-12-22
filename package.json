@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "start": "cd frontend && ng build && cd .. && tsc && node build/server.js",
+        "start": "cd frontend && ng build && cd .. && tsc && node build/lib/server.js",
+        "startLocalhost": "tsc && node build/lib/server.js",
         "test": "mocha",
         "installAll": "cd frontend && npm install && cd .. && npm install"
     },

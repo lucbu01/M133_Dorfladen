@@ -1,0 +1,29 @@
+header {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+#outline, #filled {
+    display: inline-block;
+    border: 5px solid #007bff;
+    padding: 10px 20px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    font-size: xx-large;
+}
+
+#filled {
+    color: white;
+    background-color: #007bff;
+}
+
+#outline {
+    color: #007bff;
+    background-color: white;
+}
+
+nav {
+    display: flex;
+    flex-direction: row-reverse;
+}
