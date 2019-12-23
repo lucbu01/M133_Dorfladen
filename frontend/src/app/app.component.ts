@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartService } from './cart.service';
+import { Cart } from '../../../models/Cart';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions = [
-      this.cartService.cartChange.subscribe(() => this.loadCart())
+      this.cartService.cartChange.subscribe((cart: Cart) => this.cart = cart)
     ];
     this.loadCart();
   }
