@@ -31,4 +31,12 @@ export class CartService {
   addToCart(product: Product) {
     this.httpClient.get(`/api/cart/add/${product.id}`).subscribe(() => this.cartChange.emit());
   }
+
+  removeFromCart(product: Product) {
+    this.httpClient.get(`/api/cart/remove/${product.id}`).subscribe(() => this.cartChange.emit());
+  }
+
+  removeAllFromCart(product: Product) {
+    this.httpClient.get(`/api/cart/removeAll/${product.id}`).subscribe(() => this.cartChange.emit());
+  }
 }

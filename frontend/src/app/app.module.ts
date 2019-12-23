@@ -11,12 +11,14 @@ import { MatIconModule, MatIcon } from '@angular/material/icon';
 
 import { OverviewComponent } from './overview/overview.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OverviewComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

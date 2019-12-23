@@ -24,11 +24,28 @@ export class Cart {
     }
 
     add(product: Product) {
-        const position = this.positions.filter(position => position.product === product);
+        const position = this.positions.filter(position => position.product.id === product.id);
         if(position.length === 1) {
             position[0].count++;
         } else {
             this.positions.push(new CartPosition(product));
+        }
+    }
+
+    remove(product: Product) {
+        const position = this.positions.filter(position => position.product.id === product.id);
+        if(position.length === 1) {
+            position[0].count--;
+            if(position[0].count === 0){
+                this.positions.splice(this.positions.indexOf(position[0]), 1);
+            }
+        }
+    }
+
+    removeAll(product: Product) {
+        const position = this.positions.filter(position => position.product.id === product.id);
+        if(position.length === 1) {
+            this.positions.splice(this.positions.indexOf(position[0]), 1);
         }
     }
 }

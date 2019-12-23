@@ -1,0 +1,26 @@
+<h1>Warenkorb</h1>
+<table *ngIf="cart" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Produkt</th>
+            <th>Einzelpreis</th>
+            <th>Anzahl</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let position of cart.positions">
+            <td>{{position.product.productName}}</td>
+            <td>{{position.product.price | number : '1.2-2'}}</td>
+            <td>
+                <div class="input-group">
+                    <button class="btn btn-secondary" (click)="removeProduct(position.product)">-</button>
+                    <div class="input-group-text">{{position.count}}</div>
+                    <button class="btn btn-secondary" (click)="addProduct(position.product)">+</button>
+                    <button class="btn btn-danger" (click)="removeAll(position.product)"><mat-icon>remove_shopping_cart</mat-icon></button>
+                </div>
+            </td>
+            <td>{{position.total | number : '1.2-2'}}</td>
+        </tr>
+    </tbody>
+</table>
