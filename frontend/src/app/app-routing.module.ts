@@ -8,7 +8,8 @@ import { CartComponent } from './cart/cart.component';
 const routes: Routes = [
   { path: '', component: OverviewComponent },
   { path: 'product/:id', component: ProductDetailComponent },
-  { path: 'cart', component: CartComponent }
+  { path: 'cart', component: CartComponent },
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({
