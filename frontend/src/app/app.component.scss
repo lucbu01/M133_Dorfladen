@@ -31,3 +31,24 @@ nav {
     display: flex;
     flex-direction: row-reverse;
 }
+
+nav {
+    padding: 0 10px;
+}
+
+main {
+    padding: 10px;
+}
+
+@media screen and (max-width: 768px ) {
+    #outline, #filled {
+        font-size: x-large;
+    }
+}
+
+@media screen and (max-width: 600px ) {
+    #outline, #filled {
+        font-size: large;
+        letter-spacing: 5px;
+    }
+}

@@ -15,3 +15,17 @@
 .prices .oldPrice {
     font-size: medium;
 }
+
+.products img {
+    max-width: 50%;
+}
+
+@media screen and (max-width: 600px ) {
+    .products img {
+        max-width: 100%;
+    }
+
+    .products {
+        flex-direction: column;
+    }
+}
