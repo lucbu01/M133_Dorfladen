@@ -33,4 +33,4 @@
         </tr>
     </tfoot>
 </table>
-<button class="btn btn-primary" [disabled]="cart && cart.positions.length === 0">Einkauf Abschliessen</button>
+<button class="btn btn-primary" [disabled]="cart && cart.positions.length === 0" [routerLink]="'/checkout'">Einkauf Abschliessen</button>
