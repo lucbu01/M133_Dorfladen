@@ -1,3 +1,20 @@
 .input-group * {
     margin-right: 10px;
 }
+
+.form-control {
+    max-width: 100px;
+}
+
+.btn-add-remove {
+    width: 40px;;
+}
+
+@media screen and (max-width: 768px ) {
+}
+
+@media screen and (max-width: 600px ) {
+    .btn-add-remove {
+        display: none;
+    }
+}

@@ -5,7 +5,7 @@
   </div>
 </header>
 <nav>
-  <button class="btn btn-primary" [routerLink]="['/cart']">
+  <button mat-button class="btn btn-primary" [routerLink]="['/cart']">
     <mat-icon>shopping_cart</mat-icon>
     CHF {{(cart ? cart.total : 0) | number : '1.2-2'}}
   </button>

@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { OverviewComponent } from './overview/overview.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
@@ -28,6 +29,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatIconModule,
+    MatButtonModule,
     NgbModule,
     FormsModule,
     HttpClientModule

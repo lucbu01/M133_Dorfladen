@@ -48,4 +48,17 @@ export class Cart {
             this.positions.splice(this.positions.indexOf(position[0]), 1);
         }
     }
+
+    set(product: Product, count: number)  {
+        if(count > 0) {
+            const position = this.positions.filter(position => position.product.id === product.id);
+            if(position.length === 1) {
+                position[0].count = count;
+            } else {
+                this.positions.push(new CartPosition(product, count));
+            }
+        } else {
+            this.removeAll(product);
+        }
+    }
 }

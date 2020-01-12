@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Cart } from '../../../../models/Cart';
+import { Cart, CartPosition } from '../../../../models/Cart';
 import { Subscription } from 'rxjs';
 import { CartService } from '../cart.service';
 import { Product } from '../../../../models/Product';
@@ -40,6 +40,10 @@ export class CartComponent implements OnInit, OnDestroy {
 
   removeAll(product: Product) {
     this.cartService.removeAllFromCart(product);
+  }
+
+  countUpdated(position: CartPosition) {
+    this.cartService.setPositionCount(position.product, position.count);
   }
 
 }

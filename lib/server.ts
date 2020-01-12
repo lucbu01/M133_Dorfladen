@@ -85,6 +85,24 @@ app.get('/api/cart/removeAll/:id', (req, res) => {
     }
 });
 
+app.get('/api/cart/:id/:count', (req, res) => {
+    const product = ProductReader.getById(req.params.id);
+    const cart = getCart(req);
+    if(product) {
+        const count : number = parseInt(req.params.count);
+        if(!isNaN(count))  {
+            cart.set(product, count)
+            res.header({'Content-Type': 'application/json', 'status': 200});
+            res.send(cart);
+        } else {
+            res.status(500);
+            res.send("count has to be a number");
+        }
+    } else {
+        res.sendStatus(404);
+    }
+});
+
 app.get('*', (req, res) => {
     if (/(\.html|\.js|\.ico|\.json|\.jpg|\.png)$/.test(req.path)) {
         fs.readFile(`frontend/dist/dorfladen${req.path}`, (err, data) => {

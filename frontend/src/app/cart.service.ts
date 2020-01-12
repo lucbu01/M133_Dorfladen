@@ -33,6 +33,10 @@ export class CartService {
     this.httpClient.get(`/api/cart/removeAll/${product.id}`).subscribe((data) => this.cartChange.emit(this.dataToCart(data)));
   }
 
+  setPositionCount(product: Product, count) {
+    this.httpClient.get(`/api/cart/${product.id}/${count}`).subscribe((data) => this.cartChange.emit(this.dataToCart(data)));
+  }
+
   private dataToCart(data: any) {
       const cart = new Cart();
       (data as any).positions.forEach(dataPosition => {
