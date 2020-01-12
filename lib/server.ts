@@ -1,11 +1,15 @@
 import * as express from 'express';
+import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser';
 import * as expressSession from 'express-session';
 import { ProductReader } from './ProductReader';
 import { Cart } from '../models/Cart';
+import { ContactData } from '../models/ContactData';
+import { ContactDataValidator, ContactDataValidatorState } from '../models/ContactDataValidator';
 import * as fs from 'fs';
 
 const app = express();
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressSession({
     secret: 'super-safa-secret',
@@ -100,6 +104,26 @@ app.get('/api/cart/:id/:count', (req, res) => {
         }
     } else {
         res.sendStatus(404);
+    }
+});
+
+app.post('/api/checkout', (req: any, res) => {
+    try {
+        const contactData = req.body as ContactData;
+        const validatorStates: ContactDataValidatorState[] = ContactDataValidator.validateAll(contactData);
+        if (validatorStates.length === 0) {
+            carts[req.session.id] = undefined;
+            res.sendStatus(200);
+        } else {
+            res.status(500);
+            res.send({
+                inputData: contactData,
+                validatorStates: validatorStates
+            });
+        }
+    } catch {
+        res.status(500);
+        res.send('Wrong body! Accepted JSON: {"firstname":"value", "lastname":"value","email":"value"}')
     }
 });
 

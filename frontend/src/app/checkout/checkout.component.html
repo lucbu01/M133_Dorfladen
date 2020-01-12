@@ -1,17 +1,21 @@
 <h1>Einkauf abschliessen</h1>
-<div class="form-group">
-    <label for="firstname">Vorname</label>
-    <input type="text" id="firstname" class="form-control" [class.is-invalid]="!validator.firstname.valid" [(ngModel)]="contactData.firstname" (input)="validateFirstname()" (focusout)="validateFirstname()">
-    <div *ngIf="!validator.firstname.valid" class="invalid-feedback">{{ messages[validator.firstname.message] }}</div>
+<ngb-alert *ngIf="message" [type]="checkoutFail ? 'danger' : 'success'" [dismissible]="checkoutFail">{{ message }}</ngb-alert>
+<div *ngIf="!checkoutComplete">
+    <div class="form-group">
+        <label for="firstname">Vorname</label>
+        <input type="text" id="firstname" class="form-control" [class.is-invalid]="!validator.firstname.valid" [(ngModel)]="contactData.firstname" (input)="validateFirstname()" (focusout)="validateFirstname()">
+        <div *ngIf="!validator.firstname.valid" class="invalid-feedback">{{ messages[validator.firstname.message] }}</div>
+    </div>
+    <div class="form-group">
+        <label for="lastname">Nachname</label>
+        <input type="text" id="lastname" class="form-control" [class.is-invalid]="!validator.lastname.valid" [(ngModel)]="contactData.lastname" (input)="validateLastname()" (focusout)="validateLastname()">
+        <div *ngIf="!validator.lastname.valid" class="invalid-feedback">{{ messages[validator.lastname.message] }}</div>
+    </div>
+    <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" class="form-control" [class.is-invalid]="!validator.email.valid" [(ngModel)]="contactData.email" (input)="validateEmail()" (focusout)="validateEmail()">
+        <div *ngIf="!validator.email.valid" class="invalid-feedback">{{ messages[validator.email.message] }}</div>
+    </div>
+    <button class="btn btn-primary" (click)="checkout()">Bestellung abschliessen!</button>
 </div>
-<div class="form-group">
-    <label for="lastname">Nachname</label>
-    <input type="text" id="lastname" class="form-control" [class.is-invalid]="!validator.lastname.valid" [(ngModel)]="contactData.lastname" (input)="validateLastname()" (focusout)="validateLastname()">
-    <div *ngIf="!validator.lastname.valid" class="invalid-feedback">{{ messages[validator.lastname.message] }}</div>
-</div>
-<div class="form-group">
-    <label for="email">E-Mail</label>
-    <input type="email" id="email" class="form-control" [class.is-invalid]="!validator.email.valid" [(ngModel)]="contactData.email" (input)="validateEmail()" (focusout)="validateEmail()">
-    <div *ngIf="!validator.email.valid" class="invalid-feedback">{{ messages[validator.email.message] }}</div>
-</div>
-<button class="btn btn-primary" (click)="checkout()">Bestellung abschliessen!</button>
+<button *ngIf="checkoutComplete" class="btn btn-primary" [routerLink]="['/']">Zurück zur Produkteauswahl</button>

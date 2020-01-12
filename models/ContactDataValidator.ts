@@ -1,3 +1,5 @@
+import { ContactData } from "./ContactData";
+
 export enum ContactDataValidatorState {
     OK = 'OK', EMAIL_REQUIRED = 'EMAIL_REQUIRED', FIRSTNAME_REQUIRED = 'FIRSTNAME_REQUIRED', LASTNAME_REQUIRED = 'LASTNAME_REQUIRED', EMAIL_FORMAT = 'EMAIL_FORMAT'
 }
@@ -28,7 +30,7 @@ export class ContactDataValidator {
         }
     }
 
-    public static validateEmail(value: string) {
+    public static validateEmail(value: string): ContactDataValidatorState {
         if(!this.validateRequired(value)) {
             return ContactDataValidatorState.EMAIL_REQUIRED;
         } else if(!this.emailRegex.test(value)) {
@@ -36,5 +38,22 @@ export class ContactDataValidator {
         } else {
             return ContactDataValidatorState.OK;
         }
+    }
+
+    public static validateAll(contactData: ContactData): ContactDataValidatorState[] {
+        const output = [];
+        let actualState: ContactDataValidatorState = this.validateFirstname(contactData.firstname);
+        if(actualState != ContactDataValidatorState.OK) {
+            output.push(actualState);
+        }
+        actualState = this.validateFirstname(contactData.firstname);
+        if(actualState != ContactDataValidatorState.OK) {
+            output.push(actualState);
+        }
+        actualState = this.validateFirstname(contactData.firstname);
+        if(actualState != ContactDataValidatorState.OK) {
+            output.push(actualState);
+        }
+        return output;
     }
 }

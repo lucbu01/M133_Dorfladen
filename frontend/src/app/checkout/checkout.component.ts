@@ -3,6 +3,7 @@ import { ContactData } from '../../../../models/ContactData';
 import { ContactDataValidator, ContactDataValidatorState } from '../../../../models/ContactDataValidator';
 import { CartService } from '../cart.service';
 import { Router } from '@angular/router';
+import { CheckoutService } from '../checkout.service';
 
 @Component({
   selector: 'app-checkout',
@@ -33,8 +34,11 @@ export class CheckoutComponent implements OnInit {
       message: 'OK'
     },
   };
+  checkoutComplete: boolean = false;
+  checkoutFail: boolean = false;
+  message: string;
 
-  constructor(private cartService: CartService, private router: Router) { }
+  constructor(private cartService: CartService, private router: Router, private checkoutService: CheckoutService) { }
 
   ngOnInit() {
     this.cartService.getCart().subscribe(cart => {
@@ -67,7 +71,17 @@ export class CheckoutComponent implements OnInit {
 
   checkout() {
     if (this.validateFirstname() && this.validateLastname() && this.validateEmail()) {
-      // service aufrufen
+      this.checkoutService.checkout(this.contactData).subscribe(() => this.finishCheckout(true), () =>this.finishCheckout(false));
+    }
+  }
+
+  finishCheckout(successful: boolean) {
+    this.checkoutComplete = successful;
+    this.checkoutFail = !successful;
+    if(successful === true) {
+      this.message = 'Die Daten wurden erfolgreich übermittelt. Vielen Dank für Ihren Einkauf.';
+    } else {
+      this.message = 'Es gab einen Fehler. Bitte überprüfen Sie Ihre Eingaben.'
     }
   }
 }
