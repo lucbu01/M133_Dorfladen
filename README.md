@@ -26,3 +26,9 @@ Wurden alle oben aufgeführte Schritte erfolgreich abgeschlossen, kann der Serve
 ```bash
 npm start
 ```
+
+## Tests ausführen
+Wenn man sich mit der Konsole im root-Projektordner befindet, kann man die Tests mit folgendem Befehl ausführen:
+```bash
+npm test
+```

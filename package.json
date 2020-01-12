@@ -5,7 +5,7 @@
     "scripts": {
         "start": "cd frontend && ng build && cd .. && tsc && node build/lib/server.js",
         "startLocalhost": "tsc && node build/lib/server.js",
-        "test": "mocha",
+        "test": "node node_modules/mocha/bin/mocha -r ts-node/register test/**/*.tests.ts",
         "installAll": "cd frontend && npm install && cd .. && npm install"
     },
     "author": "Luca Bucher",
