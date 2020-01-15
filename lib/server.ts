@@ -18,7 +18,7 @@ app.use(expressSession({
 }));
 
 const port = 8080;
-const frontendDir = '/frontend/dist/dorfladen';
+const frontendDir = 'frontend/dist/dorfladen';
 const carts = {};
 
 app.get('/api/products', (req, res) => {
@@ -129,7 +129,7 @@ app.post('/api/checkout', (req: any, res) => {
 });
 
 app.get('*', (req, res) => {
-    if (/(\.html|\.js|\.ico|\.json|\.jpg|\.png)$/.test(req.path)) {
+    if (/(\.html|\.js|\.ico|\.json|\.jpg|\.png|\.map)$/.test(req.path)) {
         fs.readFile(`${frontendDir}${req.path}`, (err, data) => {
             if (err) {
                 res.sendStatus(404);
