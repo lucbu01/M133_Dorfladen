@@ -4,7 +4,10 @@
     <div id="outline">RAIN</div>
   </div>
 </header>
-<nav>
+<nav [ngStyle]="{ 'flex-direction': router.url === '/' ? 'row-reverse' : 'row' }">
+  <button *ngIf="router.url !== '/'" mat-button class="btn btn-primary" onclick="history.back()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
   <button mat-button class="btn btn-primary" [routerLink]="['/cart']">
     <mat-icon>shopping_cart</mat-icon>
     CHF {{(cart ? cart.total : 0) | number : '1.2-2'}}
