@@ -23,7 +23,7 @@ Alle npm Packete vom Projekt sind in den Files /package.json und /frontend/packa
 npm run installAll
 ```
 
-## Server zu starten
+## Server starten
 
 ### Server starten
 Wurden alle oben aufgeführte Schritte erfolgreich abgeschlossen, kann der Server gestartet werden. Dafür muss man sich mit der Konsole im root-Projektorder befinden und folgenden Befehl eingeben:
